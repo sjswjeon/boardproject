@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class BoardService {
@@ -25,5 +26,16 @@ public class BoardService {
         board.setDate(newDate);
         board.setUser(user);
         return boardRepository.save(board);
+    }
+
+    public List<Board> dropUserfromBoard(Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        List<Board> boards = boardRepository.findByUser(user);
+
+        for (Board board : boards) {
+            board.setUser(null);
+        }
+
+        return boards;
     }
 }

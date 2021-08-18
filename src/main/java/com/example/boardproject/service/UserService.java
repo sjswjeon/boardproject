@@ -17,6 +17,9 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
+    private BoardService boardService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public User save(User user) {
@@ -26,6 +29,7 @@ public class UserService {
         user.setEnabled(true);
         user.setDate(newDate);
         user.setLevel("Level1");
+        user.setPoint(0L);
         Role role = new Role();
         role.setId(1L);
         user.getRoles().add(role);
@@ -35,5 +39,13 @@ public class UserService {
 
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public void deleteUser(Long id) {
+        boardService.dropUserfromBoard(id);
+        User user = userRepository.findById(id).orElse(null);
+        user.getRoles().clear();
+
+        userRepository.deleteById(id);
     }
 }
