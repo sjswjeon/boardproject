@@ -30,7 +30,7 @@
 <div class="container-fluid">
     <div class="row">
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
-             th:replace="fragments/common :: nav('board')">
+             th:replace="fragments/common :: nav('home')">
             <!--            <div class="position-sticky pt-3">-->
             <!--                <ul class="nav flex-column">-->
             <!--                    <li class="nav-item">-->
@@ -93,74 +93,84 @@
             <!--            </div>-->
         </nav>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <div class="container table-responsive mx-auto my-auto">
-                <h2 class="my-3">Board</h2>
-
-                <form class="row g-3 justify-content-end" th:action="@{/board/list}" method="get">
-                    <div class="col-auto">
-                        <label for="searchText" class="visually-hidden">Search</label>
-                        <input type="text" class="form-control" id="searchText" name="searchText" th:value="${param.searchText}">
+            <div class="container mx-auto my-auto">
+                <h2 class="text-center my-2">Personal info</h2>
+                <p class="text-center">Basic info, like your name and email, that you use on our services</p>
+            </div>
+            <div class="container h-100 p-5 mx-auto my-auto bg-light border rounded-3 ">
+                <h4 class="py-3 mb-3 border-bottom">Basic info</h4>
+                <div class="float-start">
+                    <div class="py-3 mb-3 border-bottom">
+                        <span>USERNAME</span>
                     </div>
-                    <div class="col-auto">
-                        <button type="submit" class="btn btn-dark mb-3">Search</button>
+                    <div class="py-3 mb-3 border-bottom">
+                        <span>MEMBERSHIP LEVEL</span>
                     </div>
-                </form>
-
-                <div>Total : <span th:text="${boards.totalElements}"></span></div>
-                <table class="table table-striped">
-                    <thead>
-                    <tr class="text-center">
-                        <th scope="col">#</th>
-                        <th scope="col">Level</th>
-                        <th scope="col">UserId</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Date</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="text-center" th:each="board : ${boards}">
-                        <td th:text="${board.id}">999</td>
-                        <td th:if="${board.user!= null}" th:text="${board.user.level}">BASIC</td>
-                        <td th:unless="${board.user!= null}">N/A</td>
-                        <td th:if="${board.user!= null}" th:text="${board.user.username}">Superman0334</td>
-                        <td th:unless="${board.user!= null}">Unknown</td>
-                        <td><a th:text="${board.title}" th:href="@{/board/readpost(id = ${board.id})}">This is a title</a></td>
-                        <td th:text="${board.date}">2010/08/08 00:00:00</td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <div class="text-end">
-                    <a type="button" class="btn btn-outline-secondary" th:href="@{/board/form}">Write</a>
+                    <div class="py-3 mb-3 border-bottom">
+                        <span>MEMBERSHIP POINT</span>
+                    </div>
+                    <div class="py-3 mb-3 border-bottom">
+                        <span>PASSWORD</span>
+                    </div>
+                    <div class="py-3 mb-3 border-bottom">
+                        <span>NAME</span>
+                    </div>
+                    <div class="py-3 mb-3 border-bottom">
+                        <span>GENDER</span>
+                    </div>
+                    <div class="py-3 mb-3 border-bottom">
+                        <span>EMAIL</span>
+                    </div>
+                    <div class="py-3 mb-3 border-bottom">
+                        <span>PHONE</span>
+                    </div>
+                    <div class="py-3 mb-3 border-bottom">
+                        <span>JOIN DATE</span>
+                    </div>
+                    <button class="btn btn-danger" type="button">Delete my account</button>
                 </div>
-
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item" th:classappend="${boards.pageable.pageNumber + 1 == 1} or ${boards.totalElements == 0} ? 'disabled'">
-                            <a class="page-link" href="#" th:href="@{/board/list(page = ${boards.pageable.pageNumber - 1}, searchText = ${param.searchText})}">Previous</a>
-                        </li>
-                        <li class="page-item" th:unless="${boards.totalElements == 0}" th:classappend="${boards.pageable.pageNumber + 1 == i} ? 'disabled'" th:each="i: ${#numbers.sequence(startPage, endPage)}">
-                            <a class="page-link" href="#" th:text="${i}" th:href="@{/board/list(page = ${i - 1}, searchText = ${param.searchText})}">1</a>
-                        </li>
-                        <li class="page-item disabled" th:if="${boards.totalElements == 0}">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item" th:classappend="${boards.pageable.pageNumber == boards.totalPages - 1} or ${boards.totalElements == 0} ? 'disabled'">
-                            <a class="page-link" href="#" th:href="@{/board/list(page = ${boards.pageable.pageNumber + 1}, searchText = ${param.searchText})}">Next</a>
-                        </li>
-                    </ul>
-                </nav>
-
+                <div class="float-start">
+                    <div class="py-3 mb-3 border-bottom">
+                        <span class="mx-5">no set</span>
+                    </div>
+                    <div class="py-3 mb-3 border-bottom">
+                        <span class="mx-5">no set</span>
+                    </div>
+                    <div class="py-3 mb-3 border-bottom">
+                        <span class="mx-5">no set</span>
+                    </div>
+                    <div class="py-3 mb-3 border-bottom">
+                        <span class="mx-5">Last changed, May 00, 2000</span>
+                    </div>
+                    <div class="py-3 mb-3 border-bottom">
+                        <span class="mx-5">no set</span>
+                    </div>
+                    <div class="py-3 mb-3 border-bottom">
+                        <span class="mx-5">no set</span>
+                    </div>
+                    <div class="py-3 mb-3 border-bottom">
+                        <span class="mx-5">no set</span>
+                    </div>
+                    <div class="py-3 mb-3 border-bottom">
+                        <span class="mx-5">no set</span>
+                    </div>
+                    <div class="py-3 mb-3 border-bottom">
+                        <span class="mx-5">no set</span>
+                    </div>
+                </div>
             </div>
         </main>
+
     </div>
 </div>
 
 <!-- Optional JavaScript; choose one of the two! -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+
 <!-- Option 2: Separate Popper and Bootstrap JS -->
 <!--
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

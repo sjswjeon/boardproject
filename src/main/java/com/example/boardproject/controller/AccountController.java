@@ -30,4 +30,9 @@ public class AccountController {
         userService.save(user);
         return "redirect:/";
     }
+
+    @GetMapping("/personalinfo")
+    public String personalInfo() {
+        return "account/personalinfo";
+    }
 }

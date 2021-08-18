@@ -25,12 +25,23 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-    <a class="btn btn-dark" href="#" th:href="@{/account/signin}">Login</a>
-    <a class="btn btn-dark" href="#" th:href="@{/account/register}">Register</a>
+    <a class="btn btn-dark" sec:authorize="!isAuthenticated()" href="#" th:href="@{/account/signin}">Login</a>
+    <a class="btn btn-dark" sec:authorize="!isAuthenticated()" href="#" th:href="@{/account/register}">Register</a>
+
+    <div class="dropdown">
+        <a class="btn btn-warning mx-2 dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false" sec:authorize="isAuthenticated()" href="#">MyPage</a>
+        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+            <li><a class="dropdown-item" href="#" th:href="@{/account/personalinfo}">Personal info</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Sign out</a></li>
+        </ul>
+    </div>
 
     <div class="navbar-nav">
         <form class="nav-item text-nowrap" th:action="@{/logout}" method="post">
-            <button type="submit" class="btn btn-dark" href="#">Sign out</button>
+            <button type="submit" class="btn btn-dark" href="#" sec:authorize="isAuthenticated()">Sign out</button>
         </form>
     </div>
 </header>
