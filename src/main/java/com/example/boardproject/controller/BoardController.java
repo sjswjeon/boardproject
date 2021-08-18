@@ -2,6 +2,7 @@ package com.example.boardproject.controller;
 
 import com.example.boardproject.model.Board;
 import com.example.boardproject.repository.BoardRepository;
+import com.example.boardproject.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,9 @@ public class BoardController {
 
     @Autowired
     private BoardRepository boardRepository;
+
+    @Autowired
+    private BoardService boardService;
 
     //    전체 게시물 목록
     @GetMapping("/list")
@@ -37,7 +41,7 @@ public class BoardController {
     //    게시물 업로드
     @PostMapping("/form")
     public String postForm(@ModelAttribute Board board) {
-        boardRepository.save(board);
+        boardService.save(board);
         return "redirect:/board/list";
     }
 }
