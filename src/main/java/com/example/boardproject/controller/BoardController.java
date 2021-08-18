@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -56,12 +57,13 @@ public class BoardController {
 
     //    게시물 업로드
     @PostMapping("/form")
-    public String postForm(@Valid Board board, BindingResult bindingResult) {
+    public String postForm(@Valid Board board, BindingResult bindingResult, Authentication authentication) {
         boardValidator.validate(board, bindingResult);
+        String username = authentication.getName();
         if (bindingResult.hasErrors()) {
             return "board/form";
         }
-        boardService.save(board);
+        boardService.save(board, username);
         return "redirect:/board/list";
     }
 

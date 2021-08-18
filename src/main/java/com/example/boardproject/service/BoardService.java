@@ -1,7 +1,9 @@
 package com.example.boardproject.service;
 
 import com.example.boardproject.model.Board;
+import com.example.boardproject.model.User;
 import com.example.boardproject.repository.BoardRepository;
+import com.example.boardproject.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +16,14 @@ public class BoardService {
     @Autowired
     private BoardRepository boardRepository;
 
-    public Board save(Board board) {
+    @Autowired
+    private UserRepository userRepository;
+
+    public Board save(Board board, String username) {
         String newDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        User user = userRepository.findByUsername(username);
         board.setDate(newDate);
+        board.setUser(user);
         return boardRepository.save(board);
     }
 }

@@ -2,10 +2,7 @@ package com.example.boardproject.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -18,4 +15,8 @@ public class Board {
     private String title;
     private String content;
     private String date;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
