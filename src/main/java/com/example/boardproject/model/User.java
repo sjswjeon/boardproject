@@ -23,6 +23,7 @@ public class User {
     private String date;
     private String gender;
     private String level;
+    private Long point;
 
     @ManyToMany
     @JoinTable(
