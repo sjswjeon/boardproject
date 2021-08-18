@@ -108,11 +108,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="text-center">
-                        <td>999</td>
+                    <tr class="text-center" th:each="board : ${boards}">
+                        <td th:text="${board.id}">999</td>
                         <td>BASIC</td>
                         <td>Superman0334</td>
-                        <td>This is a title</td>
+                        <td th:text="${board.title}">This is a title</td>
                         <td>2010/08/08 00:00:00</td>
                     </tr>
                     </tbody>
