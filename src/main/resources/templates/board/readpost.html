@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/common :: head('WELCOME!')">
     <!--    &lt;!&ndash; Required meta tags &ndash;&gt;-->
     <!--    <meta charset="utf-8">-->
@@ -122,8 +122,8 @@
                     <div class="text-end">
                         <a type="button" class="btn btn-outline-secondary" th:href="@{/board/list}">Back</a>
                         <a type="button" class="btn btn-outline-secondary"
-                           th:href="@{/board/form(id = *{id})}">Modify</a>
-                        <button type="button" class="btn btn-danger" th:onclick="|deleteBoard(*{id})|">Delete</button>
+                           th:href="@{/board/form(id = *{id})}" sec:authorize="hasRole('ROLE_ADMIN')">Modify</a>
+                        <button type="button" class="btn btn-danger" th:onclick="|deleteBoard(*{id})|" sec:authorize="hasRole('ROLE_ADMIN')">Delete</button>
                     </div>
 
                 </form>

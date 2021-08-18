@@ -23,6 +23,7 @@ public class BoardService {
     public Board save(Board board, String username) {
         String newDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         User user = userRepository.findByUsername(username);
+        user.setPoint(user.getPoint() + 10L);
         board.setDate(newDate);
         board.setUser(user);
         return boardRepository.save(board);
