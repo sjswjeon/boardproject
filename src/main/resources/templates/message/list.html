@@ -123,12 +123,16 @@
                         <tr class="text-center">
                             <td th:text="${receivedmessage.id}">999</td>
                             <td th:text="${receivedmessage.content}">No set</td>
-                            <td th:text="${receivedmessage.user.username}">No set</td>
+                            <td><a th:text="${receivedmessage.user.username}" th:href="@{/message/form(id = ${receivedmessage.id})}">No set</a></td>
                             <td th:text="${receivedmessage.receivedUser.username}">No set</td>
                         </tr>
                     </div>
                     </tbody>
                 </table>
+
+                <div class="text-end">
+                    <a type="button" class="btn btn-outline-secondary" th:href="@{/message/form}">Send New Message</a>
+                </div>
 
                 <table class="table table-striped">
                     <h2>Sent Message</h2>

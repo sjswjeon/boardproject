@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,8 +27,17 @@ public class MessageController {
     private MessageService messageService;
 
     @GetMapping("/form")
-    public String form(Model model) {
-        model.addAttribute("message", new Message());
+    public String form(Model model, @RequestParam(required = false) Long id) {
+
+        if (id == null) {
+            model.addAttribute("message", new Message());
+        } else {
+            Message receivedMessage = messageRepository.findById(id).orElse(null);
+            Long senderid = receivedMessage.getSenderid();
+            Message message = new Message();
+            message.setReceiverid(senderid);
+            model.addAttribute("message", message);
+        }
         return "message/form";
     }
 
