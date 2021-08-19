@@ -107,7 +107,31 @@
                 <!--                        <button type="submit" class="btn btn-dark mb-3">Search</button>-->
                 <!--                    </div>-->
                 <!--                </form>-->
+
                 <table class="table table-striped">
+                    <h2>Received Message</h2>
+                    <thead>
+                    <tr class="text-center">
+                        <th scope="col">#</th>
+                        <th scope="col">Content</th>
+                        <th scope="col">From</th>
+                        <th scope="col">To</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <div th:each="receivedmessage : ${receivedmessages}">
+                        <tr class="text-center">
+                            <td th:text="${receivedmessage.id}">999</td>
+                            <td th:text="${receivedmessage.content}">No set</td>
+                            <td th:text="${receivedmessage.user.username}">No set</td>
+                            <td th:text="${receivedmessage.receivedUser.username}">No set</td>
+                        </tr>
+                    </div>
+                    </tbody>
+                </table>
+
+                <table class="table table-striped">
+                    <h2>Sent Message</h2>
                     <thead>
                     <tr class="text-center">
                         <th scope="col">#</th>
@@ -122,7 +146,7 @@
                             <td th:text="${message.id}">999</td>
                             <td th:text="${message.content}">No set</td>
                             <td th:text="${message.user.username}">No set</td>
-                            <td th:text="${message.receiverid}">No set</td>
+                            <td th:text="${message.receivedUser.username}">No set</td>
                         </tr>
                     </div>
                     </tbody>

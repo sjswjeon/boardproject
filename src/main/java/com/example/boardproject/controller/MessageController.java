@@ -45,8 +45,10 @@ public class MessageController {
     @GetMapping("/list")
     public String list(Model model, Authentication authentication) {
         String username = authentication.getName();
-        List<Message> messages = messageService.list(username);
+        List<Message> messages = messageService.sentList(username);
+        List<Message> receivedMessage = messageService.receivedList(username);
         model.addAttribute("messages", messages);
+        model.addAttribute("receivedmessages", receivedMessage);
         return "message/list";
     }
 }

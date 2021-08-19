@@ -24,8 +24,13 @@ public class MessageService {
         return messageRepository.save(message);
     }
 
-    public List<Message> list(String username) {
+    public List<Message> sentList(String username) {
         User user = userRepository.findByUsername(username);
         return user.getMessages();
+    }
+
+    public List<Message> receivedList(String username) {
+        User user = userRepository.findByUsername(username);
+        return user.getReceivedMessages();
     }
 }

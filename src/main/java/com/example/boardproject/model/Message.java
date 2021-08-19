@@ -19,4 +19,8 @@ public class Message {
     @ManyToOne
     @JoinColumn(name = "senderid", insertable = false, updatable = false)
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "receiverid", insertable = false, updatable = false)
+    private User receivedUser;
 }
