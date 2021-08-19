@@ -1,7 +1,9 @@
 package com.example.boardproject.controller;
 
 import com.example.boardproject.model.Message;
+import com.example.boardproject.model.User;
 import com.example.boardproject.repository.MessageRepository;
+import com.example.boardproject.repository.UserRepository;
 import com.example.boardproject.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,6 +24,9 @@ public class MessageController {
     private MessageRepository messageRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private MessageService messageService;
 
     @GetMapping("/form")
@@ -38,8 +43,9 @@ public class MessageController {
     }
 
     @GetMapping("/list")
-    public String list(Model model) {
-        List<Message> messages = messageRepository.findAll();
+    public String list(Model model, Authentication authentication) {
+        String username = authentication.getName();
+        List<Message> messages = messageService.list(username);
         model.addAttribute("messages", messages);
         return "message/list";
     }
