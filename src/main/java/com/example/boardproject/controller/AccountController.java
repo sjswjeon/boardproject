@@ -41,4 +41,9 @@ public class AccountController {
         model.addAttribute("user", user);
         return "account/personalinfo";
     }
+
+    @GetMapping("/updateinfo")
+    public String updateInfo() {
+        return "account/updateinfo";
+    }
 }
